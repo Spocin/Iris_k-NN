@@ -13,6 +13,8 @@ public class Main {
         System.out.print("Podaj k: ");
         int k = sc.nextInt();
 
+        Operator operator = new Operator(int k, List<Data> dataList, List<Data> testList);
+
 
 
 
