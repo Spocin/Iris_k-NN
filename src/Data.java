@@ -1,8 +1,11 @@
+import java.util.HashMap;
 
 public class Data {
 
     private final double[] attributes;
     private final String decisiveAttribute;
+
+    private HashMap<Data,Double> distanceToOther;
 
     public Data (String[] stringData) {
 
@@ -23,5 +26,17 @@ public class Data {
         }
 
         return decisiveAttribute + ": " + tmp.toString() + "\n";
+    }
+
+    public double[] getAttributes() {
+        return attributes;
+    }
+
+    public String getDecisiveAttribute() {
+        return decisiveAttribute;
+    }
+
+    public void setDistanceToOther(HashMap<Data, Double> distanceToOther) {
+        this.distanceToOther = distanceToOther;
     }
 }

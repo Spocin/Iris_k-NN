@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainingDataLoader {
+public class DataLoader {
 
     public static List<Data> loadData (String path) {
         File file = new File(path);
