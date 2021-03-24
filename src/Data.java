@@ -27,7 +27,7 @@ public class Data {
             tmp.append(attribute).append(" ");
         }
 
-        return decisiveAttribute + ": " + tmp.toString() + "\n";
+        return decisiveAttribute + ": " + tmp.toString();
     }
 
     public double[] getAttributes() {
@@ -46,7 +46,7 @@ public class Data {
         this.distanceToOther = distanceToOther;
     }
 
-    public HashMap<Data, Double> getkClosestDistance() {
+    public HashMap<Data, Double> getKClosestDistance() {
         return kClosestDistance;
     }
 

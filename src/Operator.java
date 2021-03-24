@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Operator {
@@ -12,9 +13,6 @@ public class Operator {
         this.k = k;
         this.dataList = dataList;
         this.testList = testList;
-
-        System.out.println(dataList.size());
-        System.out.println(testList.size());
     }
 
 
@@ -44,6 +42,44 @@ public class Operator {
                         Map.Entry::getValue,
                         (oldValue,newValue) -> oldValue, LinkedHashMap::new)))
         );
+    }
+
+
+    public void classify() {
+
+        int percent = 0;
+        AtomicInteger positiveValues= new AtomicInteger();
+
+        for (Data data : testList) {
+
+            System.out.println(data);
+
+            AtomicInteger tmp = new AtomicInteger();
+
+            data.getKClosestDistance()
+                    .forEach((key, value) -> {
+                        if (key.getDecisiveAttribute().equals(data.getDecisiveAttribute())) {
+
+                            tmp.getAndIncrement();
+                            positiveValues.getAndIncrement();
+                            System.out.println("[+] " + key + "| " + value);
+                        } else {
+                            System.out.println("[-] " + key + "| " + value);
+                        }
+                    });
+
+            if (tmp.get() > k/2) {
+                percent++;
+                System.out.println("Classification: POSITIVE");
+            } else {
+                System.out.println("Classification: NEGATIVE");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Positively classified examples: " + percent + "/" + testList.size());
+        double accuracy = (double) positiveValues.get()/(testList.size()*k);
+        System.out.println("Accuracy: " + accuracy + "%");
     }
 
 
