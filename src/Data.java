@@ -1,21 +1,27 @@
-import java.util.HashMap;
-import java.util.Map;
 
 public class Data {
 
-    private Map<String,Double> attributes;
-    private String decisiveAttribute;
+    private final double[] attributes;
+    private final String decisiveAttribute;
 
     public Data (String[] stringData) {
 
         this.decisiveAttribute = stringData[stringData.length-1];
-        attributes = new HashMap<>();
+        this.attributes = new double[stringData.length-1];
 
         for (int i = 0; i < stringData.length-1; i++) {
-
-            String key = "x" + (i + 1);
-            attributes.put(key,Double.parseDouble(stringData[i]));
+            attributes[i] = Double.parseDouble(stringData[i]);
         }
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder tmp = new StringBuilder();
+        for (Double attribute : attributes) {
+            tmp.append(attribute).append(" ");
+        }
+
+        return decisiveAttribute + ": " + tmp.toString() + "\n";
+    }
 }
