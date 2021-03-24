@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Data {
 
@@ -6,6 +7,7 @@ public class Data {
     private final String decisiveAttribute;
 
     private HashMap<Data,Double> distanceToOther;
+    private LinkedHashMap<Data,Double> kClosestDistance;
 
     public Data (String[] stringData) {
 
@@ -36,7 +38,19 @@ public class Data {
         return decisiveAttribute;
     }
 
+    public HashMap<Data, Double> getDistanceToOther() {
+        return distanceToOther;
+    }
+
     public void setDistanceToOther(HashMap<Data, Double> distanceToOther) {
         this.distanceToOther = distanceToOther;
+    }
+
+    public HashMap<Data, Double> getkClosestDistance() {
+        return kClosestDistance;
+    }
+
+    public void setKClosestDistance(LinkedHashMap<Data, Double> kClosestDistance) {
+        this.kClosestDistance = kClosestDistance;
     }
 }
