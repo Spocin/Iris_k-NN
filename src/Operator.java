@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -79,7 +81,11 @@ public class Operator {
 
         System.out.println("Positively classified examples: " + percent + "/" + testList.size());
         double accuracy = (double) positiveValues.get()/(testList.size()*k);
-        System.out.println("Accuracy: " + accuracy + "%");
+
+        BigDecimal tmp = new BigDecimal(accuracy*100);
+        tmp = tmp.setScale(2, RoundingMode.HALF_UP);
+
+        System.out.println("Accuracy: " + tmp + "%");
     }
 
 
