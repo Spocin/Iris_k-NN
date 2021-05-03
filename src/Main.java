@@ -4,28 +4,35 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         boolean pass = true;
 
+        String trainingPath;
+        String testPath;
+
+        System.out.print("Enter path for training data set: ");
+        trainingPath = sc.nextLine();
+        System.out.println();
+
+        System.out.print("Enter path for test data set: ");
+        testPath = sc.nextLine();
+        System.out.println();
+
+        List<Data> dataList = DataLoader.loadData(trainingPath);
+        List<Data> testList = DataLoader.loadData(testPath);
+
         while (pass) {
-            Scanner sc = new Scanner(System.in);
 
-            List<Data> dataList = DataLoader.loadData("IMPORT/iris_training.txt");
-            List<Data> testList = DataLoader.loadData("IMPORT/iris_test.txt");
-
-            System.out.print("Enter K: ");
-            int k = sc.nextInt();
-            System.out.println();
-
-            Operator operator = new Operator(k, dataList, testList);
-            operator.computeDistance();
-            operator.selectKClosest();
-            operator.classify();
-
-            System.out.println();
-            System.out.println("Do you want to enter K again? Or input your own flower for classification? (Y/N/MY)");
+            System.out.println("Do you want to classify all? Or input your own flower for classification? (Y/N/MY)");
 
             switch (sc.next()) {
+
+                case "Y":
+                    classifyForAll(dataList,testList);
+                    break;
+
                 case "N":
                     pass = false;
                     break;
@@ -40,23 +47,38 @@ public class Main {
         }
     }
 
+    private static void classifyForAll(List<Data> dataList,List<Data> testList) {
+
+        System.out.print("Enter K: ");
+        int k = sc.nextInt();
+        System.out.println();
+
+        Operator operator = new Operator(k, dataList, testList);
+        operator.computeDistance();
+        operator.selectKClosest();
+        operator.classify();
+
+        System.out.println();
+    }
+
     private static void classifyForOne (List<Data> testList,List<Data> dataList) {
-        Scanner sc = new Scanner(System.in);
         List<Data> inputList = new ArrayList<>();
 
+        //Creates array with the same dimensions as test set + 1 for classificator
         String[] tmp = new String[testList.get(0).getAttributes().length+1];
 
-        System.out.print("Podaj wartosc k: ");
+        System.out.print("Enter K: ");
         int k = sc.nextInt();
 
         for (int i = 0; i < tmp.length; i++) {
             if (i < tmp.length-1) {
-                System.out.print("Podaj wartosc " + "x" + i + ": ");
+                System.out.print("Enter " + "X" + i + ": ");
             } else {
-                System.out.print("Podaj klasyfikator: ");
+                System.out.print("Enter classificator: ");
             }
             tmp[i] = sc.next();
         }
+        System.out.println();
 
         inputList.add(new Data(tmp));
 
@@ -64,5 +86,7 @@ public class Main {
         op.computeDistance();
         op.selectKClosest();
         op.classify();
+
+        System.out.println();
     }
 }

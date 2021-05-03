@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MPP1.iml" filepath="$PROJECT_DIR$/MPP1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Iris_k-NN.iml" filepath="$PROJECT_DIR$/Iris_k-NN.iml" />
     </modules>
   </component>
 </project>
